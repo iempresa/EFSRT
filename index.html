@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulos EFSRT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff3e0; /* Fondo naranja claro */
+        }
+
+        /* Header con logo */
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #FF9800; /* Fondo naranja */
+            padding: 20px;
+            width: 100%;
+            border-bottom: 5px solid #F57C00;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            margin-right: 20px;
+        }
+
+        .header-container img {
+            height: 60px;
+            filter: brightness(0) invert(1); /* Aplica el efecto blanco al logo */
+        }
+
+        .header-container h1 {
+            color: white; /* Texto blanco */
+            font-size: 2.5em;
+            margin: 0;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        /* Separación entre el título y los botones */
+        .content {
+            margin-top: 40px; /* Espacio adicional */
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo-container {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .header-container h1 {
+                font-size: 2em;
+            }
+        }
+
+        /* Estilos generales */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 10px;
+        }
+
+        .game-card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            padding: 15px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative; /* Necesario para posicionar los botones */
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .game-card h2 {
+            font-size: 1.4em;
+            margin: 15px 0 10px;
+            color: #333;
+        }
+
+        .game-card p {
+            font-size: 0.95em;
+            color: #666;
+            padding: 0 20px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .game-card button {
+            background-color: #FF9800; /* Botón naranja */
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .game-card button:hover {
+            background-color: #F57C00; /* Naranja más oscuro al pasar el mouse */
+        }
+
+        /* Estilos para los botones estilo macOS */
+        .mac-buttons {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .mac-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ff5f57; /* Rojo (cerrar) */
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .mac-button.green {
+            background-color: #28c940; /* Verde (maximizar) */
+        }
+
+        /* Ajuste del color de fondo del iframe */
+        #iframe-container {
+            display: none;
+            margin-top: 40px;
+            width: 100%;
+            height: 600px;
+            background-color: #b0c4de; /* Color plomo azulado */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 15px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        footer a {
+            color: #FF9800; /* Enlace naranja */
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <div class="logo-container">
+           <!-- <img src="https://d30mzt1bxg5llt.cloudfront.net/public/uploads/images/_signatoryLogo/LOGO-NEUMANN.png" alt="Logo"> -->
+        </div>
+        <h1>Módulos EFSRT</h1>
+    </div>
+
+    <div class="content">
+        <main class="container">
+            <!-- Módulo 1 -->
+            <div class="game-card">
+                <div class="mac-buttons">
+                    <div class="mac-button" onclick="requestPassword('red', 'modulo1')"></div>
+                    <div class="mac-button green" onclick="requestPassword('green', 'modulo1')"></div>
+                </div>
+                <h2>📚 Módulo 1: Centros Laborales</h2>
+                <p>Si estás trabajando, realizando tus EFSRT o prácticas en una empresa vinculada a tu programa de estudio, esta modalidad es ideal para demostrar tus capacidades en el entorno laboral.</p>
+                <button onclick="confirmPaymentStatus('https://forms.gle/M2hanEfkczzQfPkD8')">Inicia tu registro</button>
+            </div>
+
+            <!-- Módulo 2 -->
+            <div class="game-card">
+                <div class="mac-buttons">
+                    <div class="mac-button" onclick="requestPassword('red', 'modulo2')"></div>
+                    <div class="mac-button green" onclick="requestPassword('green', 'modulo2')"></div>
+                </div>
+                <h2>🏫 Módulo 2: Institución Educativa (Proyectos de Investigación)</h2>
+                <p>Si realizas tus prácticas o EFSRT en el proyecto de investigación Neumann Research, con el docente Regis Fernandez, esta modalidad es ideal para ti.</p>
+                <button onclick="confirmPaymentStatus('https://forms.gle/c43DjZH4vYuVziSu6')">Inicia tu registro</button>
+            </div>
+
+            <!-- Módulo 3 -->
+            <div class="game-card">
+                <div class="mac-buttons">
+                    <div class="mac-button" onclick="requestPassword('red', 'modulo3')"></div>
+                    <div class="mac-button green" onclick="requestPassword('green', 'modulo3')"></div>
+                </div>
+                <h2>🏫 Módulo 3: Procesos Institucionales</h2>
+                <p>Si realizas tus EFSRT o prácticas preprofesionales en el Grupo Educativo Neumann, vinculadas a las capacidades de tu programa de estudio, esta modalidad es ideal para ti.</p>
+                <button onclick="confirmPaymentStatus('https://forms.gle/cZ96CpxVYSVNt3eo7')">Inicia tu registro</button>
+            </div>
+
+            <!-- Módulo 4 -->
+            <div class="game-card">
+                <div class="mac-buttons">
+                    <div class="mac-button" onclick="requestPassword('red', 'modulo4')"></div>
+                    <div class="mac-button green" onclick="requestPassword('green', 'modulo4')"></div>
+                </div>
+                <h2>💼 Módulo 4: Emprendimiento e Iniciativas de Negocio</h2>
+                <p>Si tienes un negocio propio, esta modalidad es para ti. Si no realizas tus prácticas o EFSRT en las modalidades anteriores, esta opción también es para ti.</p>
+                <button onclick="confirmPaymentStatus('https://forms.gle/sWfMhnfoSDMzdYLp8')">Inicia tu registro</button>
+            </div>
+
+            <!-- Módulo 5 -->
+            <div class="game-card">
+                <div class="mac-buttons">
+                    <div class="mac-button" onclick="requestPassword('red', 'modulo5')"></div>
+                    <div class="mac-button green" onclick="requestPassword('green', 'modulo5')"></div>
+                </div>
+                <h2>🤝 Módulo 5: Institución Educativa (Proyecto Social)</h2>
+                <p>Si realizas actividades con alguna de las organizaciones de voluntariado con convenio institucional, esta modalidad es ideal para ti.</p>
+                <button onclick="confirmPaymentStatus('https://forms.gle/hsyQouYWycMtktMy8')">Inicia tu registro</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Contenedor iframe para módulos que se abren en la misma página -->
+    <div id="iframe-container"></div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Derechos Reservados. Instituto de Educación Superior Tecnológico John Von Neumann.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        window.onload = function() {
+            Swal.fire({
+                title: '¡Importante!',
+                html: '<p>1. Revisa la información correctamente</p>' +
+                      '<p><strong style="color: red;">2. Seleccione solo una de las modalidades</strong></p>' +
+                      '<p><strong style="color: red;">3. Solo puedes hacer el envío una sola vez</strong></p>' +
+                      '<p>4. Al registrarte, revisa tu correo (Si en el lapso de una hora no llega tu nota e informe, envía un correo a soporte@neumann.edu.pe indicando el problema)</p>',
+                icon: 'info',
+                confirmButtonText: 'Entendido'
+            });
+        };
+
+        const passwordCorrect = "claveSecreta"; // Contraseña correcta
+
+        function requestPassword(color, modulo) {
+            Swal.fire({
+                title: 'Ingresa la contraseña',
+                input: 'password',
+                inputPlaceholder: 'Introduce tu contraseña',
+                inputAttributes: {
+                    autocapitalize: 'off',
+                    autocorrect: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Acceder',
+                showLoaderOnConfirm: true,
+                preConfirm: (password) => {
+                    if (password === passwordCorrect) {
+                        // Abrir el enlace correcto según el botón y módulo
+                        const enlaces = {
+                            modulo1: {
+                                red: 'https://drive.google.com/drive/folders/1jrmOOSWlm8gewXsQCij8BJfeqIHVvolA?usp=drive_link',
+                                green: 'https://docs.google.com/spreadsheets/d/1d1cJb42xpoHROuuIeub-QCPhjRf5DZ6CLfBetkCCc90/edit?gid=0#gid=0'
+                            },
+                            modulo2: {
+                                red: 'https://drive.google.com/drive/folders/1mUk8lFBZfv8J-AJabxNU_3eoOWpSWKEO?usp=drive_link',
+                                green: 'https://docs.google.com/spreadsheets/d/17wKyXaRJ0NERDwi5wqKunXN1-cMMlHbC_W2zcw2q4Jc/edit?gid=2086531985#gid=2086531985'
+                            },
+                            modulo3: {
+                                red: 'https://drive.google.com/drive/folders/1ljEBYI3B6wCljaeG_m6z59cp8flO5EgY?usp=drive_link',
+                                green: 'https://docs.google.com/spreadsheets/d/1haJz0p-RXX4gDGaCZeG5IKTzbskQKkFpdA-hiJljZFM/edit?gid=1251163015#gid=1251163015'
+                            },
+                            modulo4: {
+                                red: 'https://drive.google.com/drive/folders/1WT15y-Ti8LaWraV1-qjbUcthzegd81A1?usp=drive_link',
+                                green: 'https://docs.google.com/spreadsheets/d/1tS5tvinsuOZ5z75Klk0lDvAgFTouVOhSdQflYnmGELQ/edit?gid=1727826120#gid=1727826120'
+                            },
+                            modulo5: {
+                                red: 'https://drive.google.com/drive/folders/1h2mgoA2d3bIfKjp_QPjYwUhYD1jXi7Re?usp=drive_link',
+                                green: 'https://docs.google.com/spreadsheets/d/1rAnZ5iXohv-1HASPn3Wpwz5eXSwBsPgVIytggOCyjso/edit?gid=869776710#gid=869776710'
+                            }
+                        };
+
+                        const enlace = enlaces[modulo][color];
+                        window.open(enlace, '_blank'); // Abre en una nueva ventana
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Contraseña incorrecta.'
+                        });
+                    }
+                }
+            });
+        }
+
+        function loadIframe(url) {
+            let iframeContainer = document.getElementById('iframe-container');
+            iframeContainer.style.display = 'block'; // Mostrar el contenedor
+            iframeContainer.innerHTML = `<iframe src="${url}" frameborder="0"></iframe>`;
+            // Desplazarse automáticamente al iframe
+            iframeContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function confirmPaymentStatus(url) {
+            Swal.fire({
+                title: '¿Estás al día con tus pagos?',
+                text: "Recuerda que para registrarte no debes contar con deuda o de lo contrario no se te considerará tu registro.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, estoy al día',
+                cancelButtonText: 'No, tengo deuda',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if (url.includes('embedded=true')) {
+                        loadIframe(url);
+                    } else {
+                        window.open(url, '_blank');
+                    }
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire('Cancelado', 'Debes estar al día con tus pagos para continuar.', 'info');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
